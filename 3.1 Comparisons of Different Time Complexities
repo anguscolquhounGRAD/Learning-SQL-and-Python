@@ -1,0 +1,83 @@
+##### 3.1 Comparisons of different time complexities 
+
+
+#How to measure computer run time
+
+#Performing accurate calculation of a program's operation time is very labour intensive 
+#We will not make an accurate measurement; just a measure of a certain order of magnitude. 
+#Complexity can be viewed as the max number of primitive operations a program may execute
+#Regular operations are single additions, mulitiplications, assignments etc./
+#We may leave some operations uncounted and concetrate on those that  are performed the largest number of times
+#These operations are referred to as dominant
+
+
+
+#In summary, primitive operations are adding, comparing values, accessing an array element A[i]
+#Not primitive: sorting a list, loops, searching through an entire array. These are composed of MANY primitive operations 
+
+
+#Primitive operations cannot be simplified further, they are the lowest level individble actions
+#Regular operations just means a lilne of code that does not loop  so y = x+5 is a regular operations
+#Dominant operation; the dominant operation is the primitive/regular operation that runs the largest number of times, especially inside loops
+
+
+
+
+#Which is the dominant operation? 
+
+def dominant(n): 
+    result = 0             # 1 operation, assigning a value (primitive and regular)
+    for i in range(n):     
+        result += 1        #1 operation, primitive 
+        return result        #1 operation 
+
+print(dominant(n))
+
+# result += 1 is the dominant operation. If you looped 100,000 times, result = 0 would still be one operation, and so would return operation
+#However, result += 1 would grow the more you loop, making it the largest
+
+#Big O notation:  O(n) - linear complexity. If in O(n) the program may perform c x n operations where c is constant
+# However, it may not perform n^2 operations since this involves a higher order of magnitude of data. 
+# When calcualting complexity we omit constants; ie regarless of whehter the loop is executed 20 * n times or n/5 times, we still have complexity O(n)
+
+
+#3.2 Constant time (number of operations never changes, no matter how large the input is) - O(1):
+ 
+def constant(n):              #The function constant(n) has complexity O(1) 
+    result = n * n            #The full function performs one multiplication, one assignment '=' and one return
+    return result             #Even if n = 10 million , still just one multiplication
+
+#3.3 Logarithmic Time - O(log n)
+
+def logarithmic(n):           #This code we divide by n and assign 
+    result = 0                #So each iteration is O(1)
+    while n > 1:              #But, there is a loop which goes until n becomes 1
+        n //= 2               # start with n = 16 , it goes n = 8, n = 4, n = 2, then n =1, the loop stops
+        result += 1           #Loop ran 4 times 
+    return result             #Notice this 16 = 2^4  , the loop ran exactly the exponent. 
+                              #So this is why we use a log, given any n there is a log number of steps. Each step is O(1) complexity
+
+#3.4 Linear Time - O(n)
+
+def linear(n, A):            #Complexity does change when we change n, but in a linear way
+    for i in range(n):       #If n=0 we end immediatley. But when analysing complexity we look for worst case
+        if A[i] == 0:        #If n is large, say 100, we return '1', 100 times
+            return 0
+    return 1
+
+
+#Quadratic Time - O(n^2)
+
+def quadtraic(n):
+    result = 0                  #You have a loop that runs n times, 
+    for i range(n):               #Inside that loop you have a loop that runs n times.
+        for j in range(i, n):       #So everytime n runs, n runs again, so n*n = n^2 opps
+            result += 1
+    return result 
+
+
+
+
+
+
+
